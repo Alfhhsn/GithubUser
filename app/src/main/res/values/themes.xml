@@ -1,0 +1,12 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.GitHubUser" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.GitHubUser" parent="Base.Theme.GitHubUser" />
+    <style name="BackgroundSecond">
+        <item name="android:background">#FFFFFF</item>
+    </style>
+</resources>

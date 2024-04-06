@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">GitHubUser</string>
+    <string name="username">Username</string>
+    <string name="followers">Follower</string>
+    <string name="noFollowers">0</string>
+    <string name="following">Following</string>
+    <string name="noFollowing">0</string>
+    <string name="empty_value">Username tidak ditemukan</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dark_mode">Dark Mode</string>
+
+</resources>
