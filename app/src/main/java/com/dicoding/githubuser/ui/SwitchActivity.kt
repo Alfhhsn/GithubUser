@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.dicoding.githubuser.R
+import com.dicoding.githubuser.ui.main.SwitchViewModel
 import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SwitchActivity : AppCompatActivity() {
@@ -20,17 +22,24 @@ class SwitchActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val switchViewModel=
+            ViewModelProvider(this, ViewModelFactory(SettingPreferences.getInstance(applicationContext.dataStore))).get(
+                SwitchViewModel::class.java)
 
         val switchTheme = findViewById<SwitchMaterial>(R.id.switch_theme)
-
-        switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            if (isChecked) {
+        switchViewModel.getThemeSettings().observe(this){
+            if (it) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 switchTheme.isChecked = true
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 switchTheme.isChecked = false
             }
+        }
+
+        switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+
+            switchViewModel.saveThemeSetting(isChecked)
         }
     }
 }

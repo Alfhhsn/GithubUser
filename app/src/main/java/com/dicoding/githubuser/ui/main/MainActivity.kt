@@ -3,6 +3,7 @@ package com.dicoding.githubuser.ui.main
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import com.dicoding.githubuser.data.response.ItemsItem
 import com.dicoding.githubuser.databinding.ActivityMainBinding
 import com.dicoding.githubuser.ui.SaveFavoriteActivity
 import com.dicoding.githubuser.ui.SettingPreferences
+import com.dicoding.githubuser.ui.SwitchActivity
 import com.dicoding.githubuser.ui.UserAdapter
 import com.dicoding.githubuser.ui.ViewModelFactory
 import com.dicoding.githubuser.ui.dataStore
@@ -57,6 +59,19 @@ class MainActivity : AppCompatActivity() {
         binding.btnFavorite.setOnClickListener {
             val intent = Intent(this, SaveFavoriteActivity::class.java)
             startActivity(intent)
+        }
+
+        binding.btnTheme.setOnClickListener {
+            val intent = Intent(this, SwitchActivity::class.java)
+            startActivity(intent)
+        }
+
+        mainViewModel.getThemeSettings().observe(this){
+            if (it) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
         }
     }
 

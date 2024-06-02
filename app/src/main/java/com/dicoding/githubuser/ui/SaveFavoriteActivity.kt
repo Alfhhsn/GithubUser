@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.githubuser.data.response.ItemsItem
 import com.dicoding.githubuser.database.UserEntity
 import com.dicoding.githubuser.databinding.ActivitySaveFavoriteBinding
@@ -30,15 +31,22 @@ class SaveFavoriteActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        saveFavoriteViewModel.getFavoriteUser()
+    }
+
     private fun setAdapter(listUser: List<UserEntity>) {
         val favoriteAdapter = UserAdapter()
         favoriteAdapter.submitList(mapUser(listUser))
+        binding.rvFavorite.layoutManager = LinearLayoutManager(this)
         binding.rvFavorite.adapter =favoriteAdapter
     }
 
     private fun mapUser(listUser: List<UserEntity>): List<ItemsItem>{
         val userArray = ArrayList<ItemsItem>()
         for (user in listUser) {
+            if (user.login?.isEmpty() != false)break
             userArray.add(
                 ItemsItem(
                     login = user.login,
